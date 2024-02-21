@@ -25,6 +25,6 @@ class Role
     public static function create(User $user): self
     {
         return new  self($user);
-
+      
     }
 }

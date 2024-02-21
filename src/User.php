@@ -12,19 +12,22 @@ class User
         return explode('@', self::$email)[0];
     }
 
-    public function isKnown(): string
+    public function isKnown(): bool
     {
-        $domain = explode('@', self::$email)[1];
-        if (in_array($domain, self::KNOWN_DOMAINS)) {
-            return true;
-        } else {
-            return false;
+        $domain = explode('@', self::$email);
+        if (count($domain) > 1) {
+            if (in_array($domain[1], self::KNOWN_DOMAINS)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
-    public static function create(string $email):self
+    public static function create(string $email): self
     {
-       self::$email=$email;
-       return new self();
+        self::$email = $email;
+        return new self();
     }
 }
